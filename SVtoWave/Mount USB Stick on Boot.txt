@@ -1,0 +1,9 @@
+See - https://www.shellhacks.com/raspberry-pi-mount-usb-drive-automatically/
+
+1) Find UUID with 'lsblk -fp'  (e.g. ABCD-1234)
+
+2) sudo nano /etc/fstab
+
+3) add:  UUID=ABCD-1234 /mnt/usb0 vfat defaults,auto,users,rw,nofail,umask=000 0 0
+
+4) Save, reboot
