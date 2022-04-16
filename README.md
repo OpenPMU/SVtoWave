@@ -17,7 +17,7 @@ Labels are largely self descriptive.  You may want to change:
 -  This is the "recording mask" which tells the software which channels you are interested in.  In this example, channels `0` and `4` from the ADC will be recorded, and any other channel data will be discarded.  This is useful when some of the ADC inputs are not connected, and recording noise would waste disk space.  If left blank, `[]`, then all channels are recorded.
 
 `"allowDeletion": True`
--  This gives the code permission to delete old records on disk
+-  This gives the code permission to delete old records on disk.  Deletion occurs at midnight UTC.  Be sure you understand what enabling this setting does by studying the code.  It is recommended that backups are made before chaning this setting.  It is possible that misconfiguration will lead to data loss.
 
 `"daysToKeep": 7`
 -  This is the number of days of data to keep (excluding the current day).  The larger this number is, the more storage will be required.  Requires `"allowDeletion"`.
