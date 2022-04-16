@@ -9,12 +9,12 @@ The filenames include a timestamp which indicates the time that the first SV in 
 
 ## Configuration
 
-Configuration of each tool is done via the `'config.json'` files in their folder.
+Configuration changes are made via the `'config.json'` file.
 
 Labels are largely self descriptive.  You may want to change:
 
 `"recMask": [0,4]`
--  This is the "recording mask" which tells the software which channels you are interested in.  If left blank, '[]', then all channels are recorded.
+-  This is the "recording mask" which tells the software which channels you are interested in.  In this example, channels `0` and `4` from the ADC will be recorded, and any other channel data will be discarded.  This is useful when some of the ADC inputs are not connected, and recording noise would waste disk space.  If left blank, '[]', then all channels are recorded.
 
 `"allowDeletion": True`
 -  This gives the code permission to delete old records on disk
