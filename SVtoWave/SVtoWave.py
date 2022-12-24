@@ -260,7 +260,6 @@ if __name__ == '__main__':
             waveBuffer = np.zeros((len(recMask), Fs))
 
             waveOut = WaveWrite(frameTime, SVformat["Fs"], len(recMask), wavePath, waveInterval, waveFrmt)  # Create new waveOut
-            #waveOut.pad(initialPad)
             
             # Print progress bar header, force special case for first file
             printProgressHeader(waveOut.waveTime, frameTime, forceHeader=True)
@@ -294,9 +293,9 @@ if __name__ == '__main__':
                 waveOut.append(waveBuffer)                                                  # Write out existing waveBuffer
                 waveOut.finalise()                                                          # Finalise old file
                 
-                print(">>>>", frameTime, waveFileTime, initialPad)
+                print(">>>>", frameTime, waveFileTime)
                 waveOut = WaveWrite(frameTime, SVformat["Fs"], len(recMask), wavePath, waveInterval, waveFrmt)  # Create new waveOut
-                waveBuffer = np.zeros((len(recBuffer), Fs))                                 # Create new empty waveBuffer
+                waveBuffer = np.zeros((len(recMask), Fs))                                 # Create new empty waveBuffer
                 
             elif frameTime.second == preFrameTime.second:
                 print("> DISC: Type 1 (small), waveBuffer will take care of it")
@@ -313,7 +312,7 @@ if __name__ == '__main__':
                     print("> ERROR: Pad length <0: ", padLength, frameTime.second, waveOut.getLength())
                 else:
                     waveOut.pad(int(padLength))
-                waveBuffer = np.zeros((len(recBuffer), Fs))                                 # Create new empty waveBuffer
+                waveBuffer = np.zeros((len(recMask), Fs))                                 # Create new empty waveBuffer
            
         else:   
             # No discontinuity, happy days!  The follow handles normal buffering and writing.
@@ -322,7 +321,7 @@ if __name__ == '__main__':
             if frameTime.microsecond < preFrameTime.microsecond:
                 waveBufferTest = waveBuffer.copy()
                 waveOut.append(waveBuffer)                                              # Write out existing waveBuffer                
-                waveBuffer = np.zeros((len(recBuffer), Fs))                             # Create new empty waveBuffer 
+                waveBuffer = np.zeros((len(recMask), Fs))                             # Create new empty waveBuffer 
              
                 # Progress Bar
                 # ~ This updates the console with a tick representing the time the waveBuffer
